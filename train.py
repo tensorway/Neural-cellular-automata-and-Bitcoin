@@ -22,7 +22,7 @@ device = th.device('cpu')
 #%%
 # load the image for which cellular automata
 #  will be trained for
-nimg = cv2.imread('bitcoin.png')
+nimg = cv2.imread('resources/bitcoin.png')
 nimg = cv2.cvtColor(nimg, cv2.COLOR_BGR2RGB)
 img = th.tensor(nimg, dtype=th.float32).transpose(0, 2).transpose(1, 2)
 img = img[:, 10:185, 40:210]
@@ -38,7 +38,7 @@ img.shape, img.shape[0]
 buffer = Buffer(256)
 cell = Cell([state_size*3, 128, state_size]).to(device)
 opt = th.optim.Adam(cell.parameters(), lr=1e-3)
-cell.load_state_dict(th.load("cell_bitcoin_grow_from_one_5800.th"))
+# cell.load_state_dict(th.load("resources/cell_bitcoin_grow_from_one_5800.th"))
 
 #%%
 nepoch = 2000
@@ -89,7 +89,7 @@ for ep in range(0, nepoch):
         print(ep, loss.item(), nsteps_now, loss_after_step_now, len(buffer))
         tlastprint = time.time()
     if ep%200 == 0:
-        th.save(cell.state_dict(), "cell_bitcoin_grow_from_one_"+str(ep)+".th")
+        th.save(cell.state_dict(), "resources/cell_bitcoin_grow_from_one_"+str(ep)+".th")
 
 
     writer.add_scalar('loss/all', loss, ep)
@@ -157,7 +157,7 @@ for ep in range(0, nepoch):
         print(ep, loss.item(), nsteps_now, loss_after_step_now, len(buffer))
         tlastprint = time.time()
     if ep%200 == 0:
-        th.save(cell.state_dict(), "cell_bitcoin_grow_from_one_reger_"+str(ep)+".th")
+        th.save(cell.state_dict(), "resources/cell_bitcoin_grow_from_one_reger_"+str(ep)+".th")
 
 
     writer.add_scalar('loss/all', loss, ep)

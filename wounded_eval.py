@@ -20,9 +20,9 @@ alive_thres = 0.1
 #%%
 buffer = Buffer(256)
 cell = Cell([state_size*3, 128, state_size]).to(device)
-cell.load_state_dict(th.load("cell_bitcoin_grow_from_one_5800.th"))
+cell.load_state_dict(th.load("resources/cell_bitcoin_grow_from_one_5800.th"))
 fourcc = cv2.VideoWriter_fourcc(*'MP4V')
-out = cv2.VideoWriter('regenerative.mp4', fourcc, 20.0, (512,512))
+out = cv2.VideoWriter('resources/regenerative.mp4', fourcc, 20.0, (512,512))
 
 # %%
 test_batch_size = 1
